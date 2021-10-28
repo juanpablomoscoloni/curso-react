@@ -11,11 +11,9 @@ interface Props {
   image: string,
   title:string,
   description:string,
-  freeToGame:string,
-  get:string,
   id:number
 }
-export default function GameCard({image, title, description,get,freeToGame, id}: Props) {
+export default function CardsCard({image, title, description, id}: Props) {
   const history= useHistory()
   return (
     <Card sx={{ maxWidth: 345, minWidth:345, minHeight:345, backgroundColor:'#000', border: '3px solid blue' }} >
@@ -35,9 +33,6 @@ export default function GameCard({image, title, description,get,freeToGame, id}:
       </CardContent>
       <CardActions>
         <Button onClick={()=> history.push(`/detail/${id}`)}size="small">detail</Button>
-        <Button component='a' target='_blank' href={get} size="small">get</Button>
-        <Button component='a' target='_blank' href={freeToGame} size="small">Free to game</Button>
-
       </CardActions>
     </Card>
   );
