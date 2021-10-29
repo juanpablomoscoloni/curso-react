@@ -16,24 +16,21 @@ interface Props {
 export default function CardsCard({image, title, description, id}: Props) {
   const history= useHistory()
   return (
-    <Card sx={{ maxWidth: 345, minWidth:345, minHeight:345, backgroundColor:'#000', border: '3px solid blue' }} >
+    <Card sx={{ maxWidth: 345, minWidth:345, minHeight:650, maxHeight:650, backgroundColor:'#FFFFF', border: '3px solid black' }} >
       <CardMedia
         component="img"
-        alt="green iguana"
-        height="140"
+        height="300"
         image={image}
+        onClick={()=> history.push(`/detail/${id}`)}
       />
-      <CardContent style={{backgroundColor:'#0000000'}} >
-        <Typography color='primary' gutterBottom variant="h5" component="div">
+      <CardContent style={{backgroundColor:'#FFFFFF'}} >
+        <Typography color='red' gutterBottom variant="h5" component="div">
           {title}
         </Typography>
-        <Typography variant="body2" color='primary'>
+        <Typography variant="caption" color='dark'>
           {description}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button onClick={()=> history.push(`/detail/${id}`)}size="small">detail</Button>
-      </CardActions>
     </Card>
   );
 }

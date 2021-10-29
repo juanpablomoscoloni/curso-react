@@ -238,3 +238,13 @@ export enum Type {
     XYZMonster = "XYZ Monster",
     XYZPendulumEffectMonster = "XYZ Pendulum Effect Monster",
 }
+
+export type FilterType = 'Attribute'| 'Race' | 'Type' | 'Order'
+
+export const filters = {
+    attribute: ["DARK", "DIVINE", "EARTH","FIRE", "LIGHT","WATER","WIND"],
+    race:[ "Beast", "Beast-Warrior",  "Continuous",  "Dinosaur","Divine-Beast","Thunder", "Warrior", "Wyrm", "Zombie"],
+    type: ["Effect Monster","Flip Effect Monster", "Fusion Monster","Gemini Monster","Link Monster","Normal Monster", "Normal Tuner Monster", "Pendulum Effect Fusion Monster","Pendulum Effect Monster", "Pendulum Flip Effect Monster", "Pendulum Normal Monster", "Pendulum Tuner Effect Monster", "Ritual Effect Monster", "Ritual Monster", "Skill Card",  "Spell Card",  "Spirit Monster", "Synchro Monster",  "Synchro Pendulum Effect Monster", "Synchro Tuner Monster",  "Token",  "Toon Monster",  "Trap Card",  "Tuner Monster",  "Union Effect Monster","XYZ Monster",  "XYZ Pendulum Effect Monster"],
+    order:['atk', 'name']
+}
+
