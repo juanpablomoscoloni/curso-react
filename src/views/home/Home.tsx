@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material'
 import { useEffect } from 'react'
-import { getAllCards } from '../../features/counter/cardSlice'
+import { getAllCards } from '../../features/card/cardSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import CardCatalogue from '../../components/cardCatalogue/CardCatalogue'
 import HeadHome from '../../components/headHome/HeadHome'
@@ -14,14 +14,9 @@ const Home = () => {
             dispatch(getAllCards())
         }
     },[])
-    const styles : any = makeStyles({
-        General: {
-            backgroundColor:'#C1794F'
-        },
-    })
-    const classes = styles()
+    
     return (
-        <div className={classes.General}>
+        <div >
             <Grid container  direction='column' >
                 <Grid item xs={12}>
                 <HeadHome/>

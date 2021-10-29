@@ -12,8 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { FilterType } from '../../utils/interfaces'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setFilters } from '../../features/counter/cardSlice';
-
+import { setFilters } from '../../features/card/cardSlice';
+import { makeStyles } from '@mui/styles';
 
 type State =  string
 interface Props {
@@ -50,9 +50,18 @@ export default function Selects(props: Props) {
     }
   };
 
+  const styles = makeStyles(()=>({
+    colorLetra:{
+  
+            color:'#ddd26f',
+            fontSize:20
+        }     
+}))
+const classes = styles()
+
   return (
     <div style={{display:'flex', justifyContent:'center'}}>
-      <Button onClick={handleClickOpen} color="error" size="large" >{props.title}</Button>
+      <Button onClick={handleClickOpen} className={classes.colorLetra} size="large" >{props.title}</Button>
       <Dialog  disableEscapeKeyDown open={open} onClose={ (event,reason)=> handleClose(event,reason)}>
         <DialogTitle>{props.titleDialog}</DialogTitle>
         <DialogContent>

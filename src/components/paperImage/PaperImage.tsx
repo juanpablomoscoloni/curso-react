@@ -11,8 +11,8 @@ const PaperImage = ({img, xl}:Props) => {
             { xl ?
             <Grid item xs={12}>
                 <Paper elevation={4} style={{
-                    width: !xl ? '395px': '100%',
-                    height:'235px',
+                    width: !xl ? '400px': '100%',
+                    height:'600px',
                     backgroundRepeat:'no-repeat',
                     backgroundImage:`url('${ img}')`,
                     backgroundSize:'cover',
@@ -23,8 +23,8 @@ const PaperImage = ({img, xl}:Props) => {
                 :
                 <Grid item xs>
                 <Paper elevation={4} style={{
-                    width: !xl ? '395px': '100%',
-                    height:'235px',
+                    width: !xl ? '400px': '100%',
+                    height:'600px',
                     backgroundRepeat:'no-repeat',
                     backgroundImage:`url('${ img}')`,
                     backgroundSize:'cover',

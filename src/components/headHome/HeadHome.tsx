@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Selects from '../selects/Selects'
 import {filters} from '../../utils/interfaces'
-import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../features/counter/cardSlice';
+import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../features/card/cardSlice';
 const HeadHome = () => {
     const juegos = useAppSelector((state)=> state.card.cards)
     const dispatch= useAppDispatch()
@@ -18,6 +18,11 @@ const HeadHome = () => {
             backgroundSize:'contain',
             marginBottom:5,
         },
+        colorFondo:{
+  
+            backgroundColor:'#E62420',
+            paddingBottom:'5px'
+        }   
     })
 
     const handleClick = (dataFilters:string, tipo:string)=>{
@@ -49,9 +54,9 @@ const HeadHome = () => {
                 <Grid item sm/>
             </Grid>
         </Paper>
-        <Grid item xs={12}>
-        <Box bgcolor='#7E89A5' height={40} display='flex' alignItems='center'>  
-        <Grid container direction='row' alignContent='center'>
+        <Grid item xs={12} className={classes.colorFondo}>
+        <Box className={classes.colorFondo} height={40} display='flex' alignItems='center'>  
+        <Grid container direction='row' alignContent='center' style={{ border: '3px solid black' }} className={classes.colorFondo}>
             <Grid item xs={3} >
                 <Selects  handleClick={handleClick} optionsSelect={filters.attribute} title={'Attribute'} titleDialog={'Filter By Atribute'}/>
             </Grid>
