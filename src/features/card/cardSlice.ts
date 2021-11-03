@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState, AppThunk } from '../../redux/store';
 import { fetchCount } from './counterAPI';
-import {  Card, FilterType } from '../../utils/interfaces'
+import {  Card, FilterType, Page, Parameters } from '../../utils/interfaces'
 import { platform } from 'process';
 import { TypedUseSelectorHook } from 'react-redux';
 import type { useAppDispatch } from '../../redux/hooks'
@@ -11,6 +11,7 @@ export interface CardState {
   cards : Card[]
   status: 'idle' | 'loading' | 'failed'| 'succeded';
   filters:Filters
+  page: Page 
 }
 
 type Filters = {
@@ -24,14 +25,15 @@ const initialState: CardState = {
   value: 0,
   cards :[],
   status: 'idle',
-  filters: {Attribute:'', Race:'', Type:'',Order:''}
+  filters: {Attribute:'', Race:'', Type:'',Order:''},
+  page: { pages: 0,nextPageLink: '',previosPageLink: ''}
 };
 
 
 export const getAllCards = createAsyncThunk(
   'cards/getAllCards',
-  async () => {
-    const response = await axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute=Dark',{
+  async (offset:number) => {
+    const response = await axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute=Dark&num=20&offset=${offset}`,{
       headers: {
         'Content-Type': 'text/plain'//the token is a variable which holds the token
       }
@@ -43,13 +45,13 @@ export const getAllCards = createAsyncThunk(
 
 export const getCardsByOrder = createAsyncThunk(
   'cards/getCardsByOrder',
-  async (query:string,{getState}:any) => {
+  async (param:Parameters,{getState}:any) => {
     const filtros  =  getState().card.filters
     const attribute = filtros.Attribute ? `plataform=${filtros.Attribute}&` : ''
     const race = filtros.Race ? `plataform=${filtros.Race}&` : ''
     const type = filtros.Type ? `plataform=${filtros.Type}&` : ''
-    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?
-    ${attribute}${race}${type}&sort=${query}`,{
+    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=${param.offset}
+    ${attribute}${race}${type}&sort=${param.query}`,{
       headers: {
         'Content-Type': 'text/plain'//the token is a variable which holds the token
       }
@@ -61,8 +63,8 @@ export const getCardsByOrder = createAsyncThunk(
 
 export const getCardsByAttribute = createAsyncThunk(
   'cards/getCardsByAttribute',
-  async (query:string) => {
-    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?attribute=${query}`,{
+  async (param:Parameters) => {
+    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=${param.offset}&attribute=${param.query}`,{
       headers: {
         'Content-Type': 'text/plain'//the token is a variable which holds the token
       }
@@ -74,8 +76,8 @@ export const getCardsByAttribute = createAsyncThunk(
 
 export const getCardsByType = createAsyncThunk(
   'cards/getCardsByType',
-  async (query:string) => {
-    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?type=${query}`,{
+  async (param:Parameters) => {
+    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=${param.offset}&type=${param.query}`,{
       headers: {
         'Content-Type': 'text/plain'//the token is a variable which holds the token
       }
@@ -87,8 +89,8 @@ export const getCardsByType = createAsyncThunk(
 
 export const getCardsByRace = createAsyncThunk(
   'cards/getCardsByRace',
-  async (query:string) => {
-    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?race=${query}`,{
+  async (param:Parameters) => {
+    const response = await axios.get( `https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=${param.offset}&race=${param.query}`,{
       headers: {
         'Content-Type': 'text/plain'//the token is a variable which holds the token
       }
@@ -122,6 +124,12 @@ export const cardSlice = createSlice({
        .addCase(getAllCards.fulfilled, (state, action: any) => {
          state.status = 'succeded';
         state.cards = action.payload.data;
+        let page: Page = {
+          pages: action.payload.meta.total_pages,
+          nextPageLink: action.payload.meta.pnext_page,
+          previosPageLink: action.payload.meta.previous_page,
+      };
+      state.page = page;
        })
        .addCase(getAllCards.rejected, (state, action: any) => {
         state.status = 'failed';
@@ -133,6 +141,12 @@ export const cardSlice = createSlice({
       .addCase(getCardsByRace.fulfilled, (state, action: any) => {
         state.status = 'succeded';
        state.cards = action.payload.data;
+       let page: Page = {
+        pages: action.payload.meta.total_pages,
+        nextPageLink: action.payload.meta.pnext_page,
+        previosPageLink: action.payload.meta.previous_page,
+    };
+    state.page = page;
       })
       .addCase(getCardsByRace.rejected, (state, action: any) => {
        state.status = 'failed';
@@ -144,6 +158,12 @@ export const cardSlice = createSlice({
     .addCase(getCardsByType.fulfilled, (state, action: any) => {
       state.status = 'succeded';
      state.cards = action.payload.data;
+     let page: Page = {
+      pages: action.payload.meta.total_pages,
+      nextPageLink: action.payload.meta.pnext_page,
+      previosPageLink: action.payload.meta.previous_page,
+  };
+  state.page = page;
     })
     .addCase(getCardsByType.rejected, (state, action: any) => {
      state.status = 'failed';
@@ -155,6 +175,12 @@ export const cardSlice = createSlice({
   .addCase(getCardsByAttribute.fulfilled, (state, action: any) => {
     state.status = 'succeded';
    state.cards = action.payload.data;
+   let page: Page = {
+    pages: action.payload.meta.total_pages,
+    nextPageLink: action.payload.meta.pnext_page,
+    previosPageLink: action.payload.meta.previous_page,
+};
+state.page = page;
   })
   .addCase(getCardsByAttribute.rejected, (state, action: any) => {
    state.status = 'failed';
@@ -166,6 +192,12 @@ export const cardSlice = createSlice({
 .addCase(getCardsByOrder.fulfilled, (state, action: any) => {
   state.status = 'succeded';
  state.cards = action.payload.data;
+ let page: Page = {
+  pages: action.payload.meta.total_pages,
+  nextPageLink: action.payload.meta.pnext_page,
+  previosPageLink: action.payload.meta.previous_page,
+};
+state.page = page;
 })
 .addCase(getCardsByOrder.rejected, (state, action: any) => {
  state.status = 'failed';

@@ -19,6 +19,17 @@ export interface Card {
     linkmarkers?:  Linkmarker[];
 }
 
+export interface Page {
+    pages:            number;
+    nextPageLink:          string;
+    previosPageLink:          string;
+}
+
+export interface Parameters {
+    query:            string;
+    offset:          number;
+}
+
 export enum Attribute {
     Dark = "DARK",
     Divine = "DIVINE",

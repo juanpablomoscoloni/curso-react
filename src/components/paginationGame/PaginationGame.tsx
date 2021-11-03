@@ -4,13 +4,18 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { Box } from '@mui/system';
 import { makeStyles } from '@mui/styles';
+import { useHistory } from 'react-router';
+import { type } from 'os';
+import { stringify } from 'querystring';
+import { Parameters } from '../../utils/interfaces';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, getAllCards } from '../../features/card/cardSlice';
 
 
 interface Props {
-    juegosPorPage:number,
-    setHasta: (numero :number)=> void,
-    setDesde: (numero : number)=> void,
-    cantidadPages: number
+  previousPage: string,
+  nextPage: string,
+  countPages: number
 }
 
 //! hasta: page x cantidad de juegos (30)
@@ -22,12 +27,15 @@ interface Props {
 
 
 
-export default function PaginationGame({juegosPorPage, setHasta,setDesde, cantidadPages}:Props) {
+export default function PaginationGame({previousPage,nextPage,countPages}:Props) {
   const [page, setPage] = React.useState(1);
+  const dispatch= useAppDispatch()
+  const filters = useAppSelector((state)=> state.card.filters);
+  const history = useHistory();
   const styles = makeStyles(()=>({
       colorPagination:{
           "& li button":{
-              color:'blue',
+              color:'red',
               fontSize:20
           },
           "& li button svg":{
@@ -37,13 +45,34 @@ export default function PaginationGame({juegosPorPage, setHasta,setDesde, cantid
   }))
   const classes = styles()
   const handleChange = (event:object, value: number) => {
-      console.log('value',value)
-    setHasta(value * juegosPorPage)
-    if(value > 1){
-        setDesde((value -1) * juegosPorPage)
-    }else{
-        setDesde(0)
 
+    if(filters.Order != ""){
+      let parameter: Parameters = {
+        query: filters.Order,
+        offset: (value -1) * 20
+    };
+      dispatch(getCardsByOrder(parameter))
+    } else if (filters.Attribute !== ""){
+      let parameter: Parameters = {
+        query: filters.Attribute,
+        offset: (value -1) * 20
+    };
+      dispatch(getCardsByAttribute(parameter))
+    }else if (filters.Race !== ""){
+      let parameter: Parameters = {
+        query: filters.Race,
+        offset: (value -1) * 20
+    };
+      dispatch(getCardsByRace(parameter))
+    } else if( filters.Type !== ""){
+      let parameter: Parameters = {
+        query: filters.Type,
+        offset: (value -1) * 20
+    };
+      dispatch(getCardsByType(parameter))
+    } else {
+       let offset: number = (value -1) * 20;
+      dispatch(getAllCards(offset))
     }
     setPage(value);
   };
@@ -51,7 +80,7 @@ export default function PaginationGame({juegosPorPage, setHasta,setDesde, cantid
   return (
     <Stack spacing={2}>
         <Box color='green'>
-      <Pagination color='primary' className={classes.colorPagination} count={cantidadPages} page={page} onChange={handleChange} />
+      <Pagination color='primary' className={classes.colorPagination} count={countPages} page={page} onChange={handleChange} />
         </Box>
     </Stack>
   );

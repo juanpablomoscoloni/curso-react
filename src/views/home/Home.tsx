@@ -9,9 +9,10 @@ const Home = () => {
     const dispatch = useAppDispatch()
     const status = useAppSelector((state)=>state.card.status)
     const cards = useAppSelector((state)=> state.card.cards)
+
     useEffect(()=>{
         if(cards.length ===0){
-            dispatch(getAllCards())
+            dispatch(getAllCards(0))
         }
     },[])
     
@@ -22,9 +23,13 @@ const Home = () => {
                 <HeadHome/>
                 </Grid>
                 <Grid item xs={12} marginTop={1}>
-                    {status === 'succeded' ?     
-                        <CardCatalogue/>
-                    : <Typography> No hay cartas</Typography>
+                {
+                status === 'succeded' && cards.length !=0 ?     
+                     <CardCatalogue/>
+                    : status ==='succeded'  && cards.length == 0 ? 
+                    <Typography> No hay cartas</Typography>
+                    : 
+                    <Typography> Cargando...</Typography>
                 }
                 </Grid>
             </Grid>

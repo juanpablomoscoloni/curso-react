@@ -9,6 +9,7 @@ interface Props {
 }
 const CardCatalogue = () => {
     const cards = useAppSelector((state)=> state.card.cards)
+    const page = useAppSelector((state) => state.card.page)
     return (
         <Grid container direction='column'>
             <Grid container direction='row' spacing={2} justifyContent='center'>
@@ -26,6 +27,15 @@ const CardCatalogue = () => {
 
                'Cargando..'
             }
+            </Grid>
+            <Grid item xs={12}>
+                <Grid container justifyContent='center'>
+                    <PaginationGame
+                     previousPage={page.previosPageLink}
+                     nextPage={page.nextPageLink}
+                    countPages={page.pages}
+                    />
+                </Grid>
             </Grid>
             </Grid>
 )

@@ -4,7 +4,7 @@ import { bgcolor, Box } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Selects from '../selects/Selects'
-import {filters} from '../../utils/interfaces'
+import {filters, Parameters} from '../../utils/interfaces'
 import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../features/card/cardSlice';
 const HeadHome = () => {
     const juegos = useAppSelector((state)=> state.card.cards)
@@ -15,7 +15,7 @@ const HeadHome = () => {
         containerPortada: {
             backgroundImage:`url("${img}")`,
             backgroundRepeat:'no-repeat',
-            backgroundSize:'contain',
+            backgroundSize: 'contain',
             marginBottom:5,
         },
         colorFondo:{
@@ -27,19 +27,35 @@ const HeadHome = () => {
 
     const handleClick = (dataFilters:string, tipo:string)=>{
         if(tipo === 'Attribute'){
-            dispatch(getCardsByAttribute(dataFilters))
+            let param: Parameters = {
+                query: dataFilters,
+                offset: 0
+            };
+            dispatch(getCardsByAttribute(param))
             dispatch(setFilters({type:tipo, value:dataFilters}))
         }else
         if(tipo === 'Order'){
+            let param: Parameters = {
+                query: dataFilters,
+                offset: 0
+            };
             dispatch(setFilters({type:tipo, value:dataFilters}))
-            dispatch(getCardsByOrder(dataFilters))
+            dispatch(getCardsByOrder(param))
         }else
         if(tipo === 'Race'){
-            dispatch(getCardsByRace(dataFilters))
+            let param: Parameters = {
+                query: dataFilters,
+                offset: 0
+            };
+            dispatch(getCardsByRace(param))
             dispatch(setFilters({type:tipo, value:dataFilters}))
         }else
         if(tipo === 'Type'){
-            dispatch(getCardsByType(dataFilters))
+            let param: Parameters = {
+                query: dataFilters,
+                offset: 0
+            };
+            dispatch(getCardsByType(param))
             dispatch(setFilters({type:tipo, value:dataFilters}))
         }
     }
