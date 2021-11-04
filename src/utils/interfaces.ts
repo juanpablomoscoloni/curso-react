@@ -23,6 +23,16 @@ export interface Page {
     pages:            number;
     nextPageLink:          string;
     previosPageLink:          string;
+    currentPage: number;
+}
+
+export interface Pages {
+    cards: Card[];
+    page: number;
+    attribute: string;
+    race: string;
+    type: string;
+    order: string;
 }
 
 export interface Parameters {

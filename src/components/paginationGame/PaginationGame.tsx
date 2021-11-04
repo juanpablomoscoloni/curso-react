@@ -28,10 +28,11 @@ interface Props {
 
 
 export default function PaginationGame({previousPage,nextPage,countPages}:Props) {
-  const [page, setPage] = React.useState(1);
   const dispatch= useAppDispatch()
   const filters = useAppSelector((state)=> state.card.filters);
-  const history = useHistory();
+  let cards = useAppSelector((state)=> state.card.cards);
+  const page = useAppSelector((state)=> state.card.page.currentPage);
+  const pages = useAppSelector((state)=> state.card.returnedPages);
   const styles = makeStyles(()=>({
       colorPagination:{
           "& li button":{
@@ -45,7 +46,6 @@ export default function PaginationGame({previousPage,nextPage,countPages}:Props)
   }))
   const classes = styles()
   const handleChange = (event:object, value: number) => {
-
     if(filters.Order != ""){
       let parameter: Parameters = {
         query: filters.Order,
@@ -57,6 +57,15 @@ export default function PaginationGame({previousPage,nextPage,countPages}:Props)
         query: filters.Attribute,
         offset: (value -1) * 20
     };
+    let bool: boolean = false;
+    let index : number = 0;
+    pages.map((item,index) => {
+     if(item.page === value && item.attribute === filters.Attribute){
+       bool = true;
+       index = index
+     }
+     })
+     bool ? cards =  pages[index].cards :
       dispatch(getCardsByAttribute(parameter))
     }else if (filters.Race !== ""){
       let parameter: Parameters = {
@@ -74,13 +83,13 @@ export default function PaginationGame({previousPage,nextPage,countPages}:Props)
        let offset: number = (value -1) * 20;
       dispatch(getAllCards(offset))
     }
-    setPage(value);
+    
   };
 
   return (
     <Stack spacing={2}>
-        <Box color='green'>
-      <Pagination color='primary' className={classes.colorPagination} count={countPages} page={page} onChange={handleChange} />
+        <Box color='green'  marginTop={3}  marginBottom={3}>
+      <Pagination color='secondary' className={classes.colorPagination} count={countPages} page={page} onChange={handleChange} />
         </Box>
     </Stack>
   );
