@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState, AppThunk } from '../../redux/store';
+import { RootState, AppThunk } from '../redux/store';
 import { fetchCount } from './counterAPI';
-import {  Card, FilterType, Page, Parameters, Pages } from '../../utils/interfaces'
+import {  Card, FilterType, Page, Parameters, Pages } from '../utils/interfaces'
 import { platform } from 'process';
 import { TypedUseSelectorHook } from 'react-redux';
-import type { useAppDispatch } from '../../redux/hooks'
+import type { useAppDispatch } from '../redux/hooks'
 export interface CardState {
   value: number;
   cards : Card[]
@@ -30,7 +30,6 @@ const initialState: CardState = {
   page: { pages: 0,nextPageLink: '',previosPageLink: '', currentPage:1},
   returnedPages: []
 };
-
 
 export const getAllCards = createAsyncThunk(
   'cards/getAllCards',
@@ -108,6 +107,11 @@ export const cardSlice = createSlice({
       if(type === 'Type') {state.filters.Attribute = ''; state.filters.Race=''}
       if(type === 'Race') {state.filters.Attribute = ''; state.filters.Type=''}
         state.filters[type]= value
+    }),
+    setCards:((state,action)=>{
+      console.log(action.payload.ca)
+      state.cards = action.payload.cards
+      state.page.currentPage = action.payload.page
     })
   },
   extraReducers: (builder) => {
@@ -247,9 +251,11 @@ state.returnedPages.push(returnedPage);
  state.status = 'failed';
 state.cards = action.error;
 });
+
  }
 
 });
 
 export const {setFilters}=cardSlice.actions
+export const {setCards}=cardSlice.actions
 export default cardSlice.reducer;

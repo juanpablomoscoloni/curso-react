@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@mui/material'
 import { useEffect } from 'react'
-import { getAllCards } from '../../features/card/cardSlice'
+import { getAllCards } from '../../slices/cardSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import CardCatalogue from '../../components/cardCatalogue/CardCatalogue'
 import HeadHome from '../../components/headHome/HeadHome'

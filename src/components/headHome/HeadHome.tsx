@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Selects from '../selects/Selects'
 import {filters, Parameters} from '../../utils/interfaces'
-import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../features/card/cardSlice';
+import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../slices/cardSlice';
 const HeadHome = () => {
     const juegos = useAppSelector((state)=> state.card.cards)
     const dispatch= useAppDispatch()

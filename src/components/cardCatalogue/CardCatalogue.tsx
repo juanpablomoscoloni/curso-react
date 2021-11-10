@@ -17,10 +17,7 @@ const CardCatalogue = () => {
                 cards.map((item,index) => {
                      return <Grid item key={index}>
                                  <CardsCard 
-                                 image={item.card_images[0].image_url} 
-                                 title={item.name} 
-                                 description={item.desc}
-                                 id={item.id}
+                                 card={item} 
                                  />
                             </Grid>
                     }):

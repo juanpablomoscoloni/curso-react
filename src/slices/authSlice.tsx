@@ -1,6 +1,6 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../redux/store';
+import { RootState, AppThunk } from '../redux/store';
 import { fetchCount } from './counterAPI';
 
 export interface AuthState {
@@ -29,7 +29,7 @@ const initialState: AuthState = {
 //       const response = await fetchCount(amount);
 //       // The value we return becomes the `fulfilled` action payload
 //       return response.data;
-//     }
+//     }s
 //   );
 
 //   export const getGameCategory = createAsyncThunk(

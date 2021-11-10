@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { FilterType } from '../../utils/interfaces'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setFilters } from '../../features/card/cardSlice';
+import { setFilters } from '../../slices/cardSlice';
 import { makeStyles } from '@mui/styles';
 
 type State =  string

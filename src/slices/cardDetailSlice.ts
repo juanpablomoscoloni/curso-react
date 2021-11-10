@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Card } from '../../utils/interfaces'
+import { Card } from '../utils/interfaces'
 export interface GameDetail {
   detail : Card | null,
   status: 'idle' | 'loading' | 'failed'| 'succeded';

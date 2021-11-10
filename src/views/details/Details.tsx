@@ -1,7 +1,7 @@
 import { Grid, Paper, Typography, Button } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router'
-import { getCardDetail } from '../../features/card/cardDetailSlice'
+import { getCardDetail } from '../../slices/cardDetailSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import PaperImage from '../../components/paperImage/PaperImage'
 import { Box, maxWidth } from '@mui/system'
@@ -25,12 +25,12 @@ const Details = () => {
     const history= useHistory()
     return (
         <Grid container direction='column' >
-            <Grid item xs={12} alignItems='left'>
-                <Button   onClick={()=> history.push(`/`)}>Volver</Button>
+            <Grid item xs={4} alignItems='left' marginBottom="2%">
+                <Button onClick={()=> history.push(`/`)}>Volver</Button>
             </Grid>
             <Grid item xs={12}>
                 <Grid container direction='column'>
-                    <Grid item xs={12} >
+                    <Grid item xs={12} marginBottom="5%">
                         <Grid container direction='row' justifyContent='center'>
 
                             {detail &&
@@ -47,12 +47,12 @@ const Details = () => {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={6} sm={4} alignItems='center'>
-                        <TableContainer component={Paper}>
-                            <Table  aria-label="simple table" >
+                    <Grid item xs={6} sm={4} alignItems='left' paddingLeft="15%" paddingRight="15%">
+                        <TableContainer component={Paper} color="red" >
+                            <Table size="medium">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Type</TableCell>
+                                        <TableCell align="right">Type</TableCell>
                                         <TableCell align="right">Level</TableCell>
                                         <TableCell align="right">Race</TableCell>
                                         <TableCell align="right">Archetype</TableCell>
@@ -62,7 +62,7 @@ const Details = () => {
                                 </TableHead>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell component="th" scope="row">
+                                        <TableCell align="right">
                                             {detail?.type}
                                         </TableCell>
                                         <TableCell align="right">{detail?.level}</TableCell>

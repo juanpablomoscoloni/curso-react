@@ -9,7 +9,7 @@ import { type } from 'os';
 import { stringify } from 'querystring';
 import { Parameters } from '../../utils/interfaces';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, getAllCards } from '../../features/card/cardSlice';
+import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, getAllCards,setCards } from '../../slices/cardSlice';
 
 
 interface Props {
@@ -58,14 +58,15 @@ export default function PaginationGame({previousPage,nextPage,countPages}:Props)
         offset: (value -1) * 20
     };
     let bool: boolean = false;
-    let index : number = 0;
+    let indexA : number = 0;
     pages.map((item,index) => {
      if(item.page === value && item.attribute === filters.Attribute){
        bool = true;
-       index = index
+       indexA = index
      }
      })
-     bool ? cards =  pages[index].cards :
+     bool ? dispatch(setCards(pages[indexA]))
+     :
       dispatch(getCardsByAttribute(parameter))
     }else if (filters.Race !== ""){
       let parameter: Parameters = {
