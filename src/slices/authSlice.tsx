@@ -15,40 +15,6 @@ const initialState: AuthState = {
     status: 'idle',
 };
 
-// export const getSession = createAsyncThunk(
-//   'counter/fetchCount',
-//   async (amount: number) => {
-//     const response = await fetchCount(amount);
-//     // The value we return becomes the `fulfilled` action payload
-//     return response.data;
-//   }
-// );
-// export const getGameCategory = createAsyncThunk(
-//     'counter/fetchCount',
-//     async (amount: number) => {
-//       const response = await fetchCount(amount);
-//       // The value we return becomes the `fulfilled` action payload
-//       return response.data;
-//     }s
-//   );
-
-//   export const getGameCategory = createAsyncThunk(
-//     'counter/fetchCount',
-//     async (amount: number) => {
-//       const response = await fetchCount(amount);
-//       // The value we return becomes the `fulfilled` action payload
-//       return response.data;
-//     }
-//   );
-
-//   export const getGameCategory = createAsyncThunk(
-//     'counter/fetchCount',
-//     async (amount: number) => {
-//       const response = await fetchCount(amount);
-//       // The value we return becomes the `fulfilled` action payload
-//       return response.data;
-//     }
-//   );
 
 export const authSlice = createSlice({
   name: 'auth',

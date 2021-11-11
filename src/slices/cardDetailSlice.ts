@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Card } from '../utils/interfaces'
-export interface GameDetail {
+export interface CardDetail {
   detail : Card | null,
   status: 'idle' | 'loading' | 'failed'| 'succeded';
 }
 
-const initialState: GameDetail = {
+const initialState: CardDetail = {
   detail :null,
   status: 'idle',
 };

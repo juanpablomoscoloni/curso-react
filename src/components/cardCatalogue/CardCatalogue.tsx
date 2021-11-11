@@ -2,7 +2,7 @@ import { Grid } from '@mui/material'
 import React, { useState } from 'react'
 import { useAppSelector } from '../../redux/hooks'
 import CardsCard from '../cardsCard/CardsCard'
-import PaginationGame from '../paginationGame/PaginationGame'
+import PaginationCard from '../paginationCard/PaginationCard'
 
 interface Props {
     cantidadPages:number
@@ -27,7 +27,7 @@ const CardCatalogue = () => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container justifyContent='center'>
-                    <PaginationGame
+                    <PaginationCard
                      previousPage={page.previosPageLink}
                      nextPage={page.nextPageLink}
                     countPages={page.pages}

@@ -27,7 +27,7 @@ interface Props {
 
 
 
-export default function PaginationGame({previousPage,nextPage,countPages}:Props) {
+export default function PaginationCard({previousPage,nextPage,countPages}:Props) {
   const dispatch= useAppDispatch()
   const filters = useAppSelector((state)=> state.card.filters);
   let cards = useAppSelector((state)=> state.card.cards);
