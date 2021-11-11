@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Selects from '../selects/Selects'
 import {filters, Parameters} from '../../utils/interfaces'
+import InfoProfile from '../user/UserProfile'
 import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../slices/cardSlice';
 const HeadHome = () => {
     const juegos = useAppSelector((state)=> state.card.cards)
@@ -22,7 +23,11 @@ const HeadHome = () => {
   
             backgroundColor:'#E62420',
             paddingBottom:'5px'
-        }   
+        },   
+        colorFondoUser:{
+  
+            backgroundColor:'White'
+        } 
     })
 
     const handleClick = (dataFilters:string, tipo:string)=>{
@@ -70,6 +75,11 @@ const HeadHome = () => {
                 <Grid item sm/>
             </Grid>
         </Paper>
+        <Grid className={classes.colorFondoUser}> 
+        <Grid item xs={12}>
+                    <InfoProfile/>
+                </Grid>
+        </Grid>
         <Grid item xs={12} className={classes.colorFondo}>
         <Box className={classes.colorFondo} height={40} display='flex' alignItems='center'>  
         <Grid container direction='row' alignContent='center' style={{ border: '3px solid black' }} className={classes.colorFondo}>

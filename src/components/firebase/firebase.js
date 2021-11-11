@@ -4,13 +4,14 @@ import 'firebase/auth';
 // firebaseConfig obtenida de la consola
 
 const firebaseConfig = {
-    apiKey: "AIzaSyA8C9WipsqJojxphP55geiNqomhMFRbVCo",
-    authDomain: "gameapp-29d61.firebaseapp.com",
-    projectId: "gameapp-29d61",
-    storageBucket: "gameapp-29d61.appspot.com",
-    messagingSenderId: "219634906799",
-    appId: "1:219634906799:web:3dcbb039263a4eeebcc65a"
-  };
+  apiKey: "AIzaSyAgX6mSzLMrJN7pynBmVX28TTIpRCqQC-8",
+  authDomain: "cursoreact-5a11d.firebaseapp.com",
+  projectId: "cursoreact-5a11d",
+  storageBucket: "cursoreact-5a11d.appspot.com",
+  messagingSenderId: "460720583450",
+  appId: "1:460720583450:web:cb4e4e27d7cdba9da8b2a3",
+  measurementId: "G-32RQCLC6JJ"
+};
   
 firebase.initializeApp(firebaseConfig);
 

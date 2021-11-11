@@ -12,23 +12,42 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useHistory } from 'react-router';
-
+import { db } from '../../components/firebase/firebase'
+import  CommentForm from '../../components/CommentForm/CommentForm'
 
 const Details = () => {
     const params: { id: string } = useParams()
     const dispatch = useAppDispatch()
     const detail = useAppSelector((state) => state.cardDetail.detail)
     const status = useAppSelector((state) => state.cardDetail.status)
+    const logueado = useAppSelector((state) => state.auth)
     useEffect(() => {
         dispatch(getCardDetail(params.id))
     }, [])
+
+    type CommentData = {
+        description: string,
+        email: string,
+        title : string
+    }
+
+    const customOnSubmit = (data:CommentData) => {
+        console.log(data)
+        let obj = {
+            description: data.description,
+            email: logueado.user.mail,
+            title : data.title,
+            cardId:params.id
+        }
+        db.collection("comments").doc().set(obj)
+    }
     const history= useHistory()
     return (
         <Grid container direction='column' >
             <Grid item xs={4} alignItems='left' marginBottom="2%">
                 <Button onClick={()=> history.push(`/`)}>Volver</Button>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} marginBottom={10}>
                 <Grid container direction='column'>
                     <Grid item xs={12} marginBottom="5%">
                         <Grid container direction='row' justifyContent='center'>
@@ -79,6 +98,19 @@ const Details = () => {
                     </Grid>
                 </Grid>
             </Grid>
+                 {  logueado.logueado === true ?       
+                <Grid item xs={12}>
+                    <Grid container direction='row' justifyContent='center'>
+                        <Grid item xs={12} sm={6}>
+                            <CommentForm customOnSubmit={customOnSubmit}/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                :
+                <Grid item xs={12}>
+                 <Typography>Logueate para dejar un comentario</Typography>
+                </Grid>
+                }
         </Grid>
     )
 }

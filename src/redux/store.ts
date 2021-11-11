@@ -16,11 +16,13 @@ import storage from 'redux-persist/lib/storage';
 import storageSession from 'redux-persist/lib/storage/session'
 
 import { combineReducers } from 'redux';
+import authSlice from '../slices/authSlice';
 
 export const rootReducer = combineReducers({
     card: cardSlice,
     favorites :favoritesSlice,
-    cardDetail: cardDetailSlice
+    cardDetail: cardDetailSlice,
+    auth: authSlice
 });
 
 const persistConfig = {
