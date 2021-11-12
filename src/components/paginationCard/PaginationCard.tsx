@@ -18,15 +18,6 @@ interface Props {
   countPages: number
 }
 
-//! hasta: page x cantidad de juegos (30)
-//! desde : page -1 x cantidad de juegos(30)
-
-//page 1 = 0,30
-//page 2 = 30,60
-//page 3 = 60,90
-
-
-
 export default function PaginationCard({previousPage,nextPage,countPages}:Props) {
   const dispatch= useAppDispatch()
   const filters = useAppSelector((state)=> state.card.filters);

@@ -16,7 +16,6 @@ const PaperImage = ({img, xl}:Props) => {
                     backgroundRepeat:'no-repeat',
                     backgroundImage:`url('${ img}')`,
                     backgroundSize:'cover',
-                    // border:'2px solid white',
                     margin:4
                 }} />
             </Grid>
@@ -28,7 +27,6 @@ const PaperImage = ({img, xl}:Props) => {
                     backgroundRepeat:'no-repeat',
                     backgroundImage:`url('${ img}')`,
                     backgroundSize:'cover',
-                    // border:'2px solid white',
                     margin:4
                 }} />
             </Grid>

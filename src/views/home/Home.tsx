@@ -24,9 +24,9 @@ const Home = () => {
                 </Grid>
                 <Grid item xs={12} marginTop={1}>
                 {
-                status === 'succeded' && cards.length !=0 ?     
+                status === 'succeded' && cards.length !==0 ?     
                      <CardCatalogue/>
-                    : status ==='succeded'  && cards.length == 0 ? 
+                    : status ==='succeded'  && cards.length === 0 ? 
                     <Typography> No hay cartas</Typography>
                     : 
                     <Typography> Cargando...</Typography>

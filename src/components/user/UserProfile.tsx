@@ -4,11 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Grid } from '@mui/material'
@@ -18,7 +14,6 @@ import { logout, signInWithGoogle } from '../../slices/authSlice';
 
 type Type = 'login' | 'logout' | 'favoritos'| undefined
 export default function InfoPRofile() {
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const authState = useAppSelector((state)=> state.auth)
 const dispatch = useAppDispatch()
@@ -48,8 +43,8 @@ const dispatch = useAppDispatch()
             <Grid container direction='row'>
                 <Grid item xs={10}>
                     {authState.logueado &&      
-                        <Typography variant="h6" component="h6" color='secondary' >
-                            Hola!  {authState.user.nombreCompleto} {authState.user.email}
+                        <Typography variant="h4" component="h6" color='secondary' >
+                            Welcome  {authState.user.nombreCompleto}
                         </Typography>
                     }
                 </Grid>

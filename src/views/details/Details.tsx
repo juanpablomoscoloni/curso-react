@@ -4,7 +4,6 @@ import { useParams } from 'react-router'
 import { getCardDetail } from '../../slices/cardDetailSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import PaperImage from '../../components/paperImage/PaperImage'
-import { Box, maxWidth } from '@mui/system'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';

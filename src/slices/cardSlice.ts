@@ -1,11 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { RootState, AppThunk } from '../redux/store';
-import { fetchCount } from './counterAPI';
 import {  Card, FilterType, Page, Parameters, Pages } from '../utils/interfaces'
-import { platform } from 'process';
-import { TypedUseSelectorHook } from 'react-redux';
-import type { useAppDispatch } from '../redux/hooks'
 export interface CardState {
   value: number;
   cards : Card[]

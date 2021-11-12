@@ -8,10 +8,8 @@ import {filters, Parameters} from '../../utils/interfaces'
 import InfoProfile from '../user/UserProfile'
 import { getCardsByType, getCardsByAttribute, getCardsByOrder,getCardsByRace, setFilters } from '../../slices/cardSlice';
 const HeadHome = () => {
-    const juegos = useAppSelector((state)=> state.card.cards)
     const dispatch= useAppDispatch()
     const [img,setImg]=  useState('https://upload.wikimedia.org/wikipedia/commons/1/11/Yu-Gi-Oh%21_%28Logo%29.jpg')
-    const status = useAppSelector((state)=> state.card.status)
     const styles : any = makeStyles({
         containerPortada: {
             backgroundImage:`url("${img}")`,

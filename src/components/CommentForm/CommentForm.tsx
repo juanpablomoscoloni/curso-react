@@ -1,10 +1,9 @@
 import React from 'react';
-import { useForm, NestedValue } from 'react-hook-form';
-import MenuItem from '@mui/material/MenuItem';
-import { Button, Grid, Paper, Select, Typography } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
-import { db } from '../firebase/firebase';
+
 
 type CommentData = {
     description: string,
